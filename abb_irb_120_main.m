@@ -160,11 +160,13 @@ alpha = [90 0 -90 90 -90 0].'
 % *ALL UNITS USED ARE IN MM AND DEGREES*
 % 
 for i = 1:n_dof
-    Individual_Transforms(:,:,i) = dhparam2matrix(thetas(i,1), d(i,1), a(i,1), alpha(i,1));
+    Individual_Transforms(:,:,i) = ...
+                dhparam2matrix(thetas(i,1), d(i,1), a(i,1), alpha(i,1));
     if i == 1
         Transforms(:,:,1) = Individual_Transforms(:,:,1);
     else
-        Transforms(:,:,i) = Transforms(:,:,i-1)*Individual_Transforms(:,:,i);
+        Transforms(:,:,i) = ...
+                Transforms(:,:,i-1)*Individual_Transforms(:,:,i);
     end
 end
 
@@ -207,9 +209,8 @@ T06 = Transforms(:,:,6)
 % The following function solves this equation while constraining the
 % equation to the joint limits.
 % *ALL UNITS USED ARE IN MM AND DEGREES*
-% 
-vals = [0 0 0 0 0 0].';
-solution1 = simplify(fk_solve(Transforms, q, vals, 6))
+%
+T = plotArm(0, 0, 0, 0, 0, 0);
 
 %% Question 6
 % For the following joint configuration 
@@ -229,21 +230,4 @@ solution1 = simplify(fk_solve(Transforms, q, vals, 6))
 % 
 % *ALL UNITS USED ARE IN MM AND DEGREES*
 % 
-vals = [-45, 30, -30, -30, -45, 180].';
-solution2 = double(simplify(fk_solve(Transforms, q, vals, 0)));
-solution2(:,:,6)
-
-% b) Clearly state:
-% 
-% # The Cartesian position of the robot tip, including units
-% 
-% *ALL UNITS USED ARE IN MM AND DEGREES*
-% 
-P06 = solution2(1:3,4,6)
-% 
-% # The unit vector representing the approach vector of the robot
-% this configuration
-% 
-% *ALL UNITS USED ARE IN MM AND DEGREES*
-% 
-A06 = solution2(1:3,3,6)
+T = plotArm(-45, 30, -30, -30, -45, 180);
