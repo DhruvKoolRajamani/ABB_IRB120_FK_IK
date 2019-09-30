@@ -26,7 +26,7 @@ for i = 2:n
     y = [Transformations(2,4,i-1), Transformations(2,4,i)];
     z = [Transformations(3,4,i-1), Transformations(3,4,i)];
 %     drawAxisLines(f,indTransforms(1:3,1:3,i),Transformations(1:3,4,i))
-    drawAxisLines(f,indTransforms(1:3,1:3,i-1),Transformations(1:3,4,i-1));
+    drawAxisLines(f,Transformations(1:3,1:3,i-1),Transformations(1:3,4,i-1));
     plot3(x, y, z,'m','LineWidth',3);
 end
 
