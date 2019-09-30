@@ -2,7 +2,7 @@ function [f] = drawManip(Transformations, indTransforms, Name)
 %DRAWMANIP Summary of this function goes here
 %   Detailed explanation goes here
 [l,m,n] = size(Transformations);
-f = figure('Name', Name);
+f = gcf;
 az = -165;
 el = 11;
 rotate3d on

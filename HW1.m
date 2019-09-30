@@ -230,4 +230,4 @@ T = plotArm(0, 0, 0, 0, 0, 0);
 % 
 % *ALL UNITS USED ARE IN MM AND DEGREES*
 % 
-T = plotArm(-45, 30, -30, -30, -45, 180);
+[T] = plotArm(-45, 30, -30, -30, -45, 180, f);
