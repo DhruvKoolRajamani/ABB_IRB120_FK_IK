@@ -4,10 +4,10 @@ function [trans] = dhparam2matrix(theta, d, a, alpha)
     % DH Parameters of the robot.
     %   Please enter all values in degrees and not radians.
     
-    cos_alpha = @cosd;
-    sin_alpha = @sind;
-    cos_theta = @cosd;
-    sin_theta = @sind;
+    cos_alpha = @cos;
+    sin_alpha = @sin;
+    cos_theta = @cos;
+    sin_theta = @sin;
     
     a11 = cos_theta(theta);
     a12 = -sin_theta(theta)*cos_alpha(alpha);

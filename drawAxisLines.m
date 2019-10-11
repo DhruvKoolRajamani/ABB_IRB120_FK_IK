@@ -19,6 +19,6 @@ ylabel('Y');
 zlabel('Z');
 plot3(ax_x(1,:), ax_x(2,:), ax_x(3,:), 'r', 'LineWidth',2);
 hold on
-plot3(ax_y(1,:), ax_y(2,:), ax_y(3,:), 'g', 'LineWidth',2);
+plot3(ax_y(1,:), ax_y(2,:), ax_y(3,:), 'g', 'LineWidth',0.5);
 plot3(ax_z(1,:), ax_z(2,:), ax_z(3,:), 'b', 'LineWidth',2);
 end

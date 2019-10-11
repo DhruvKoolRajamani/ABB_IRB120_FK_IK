@@ -1,18 +1,14 @@
-function [T] = plotArm(val1, val2, val3, val4, val5, val6, f)
+function [Transforms, T] = plotArm(q, thetas, d, a, alpha, name, vals, ax, runsim)
 
-syms q1 q2 q3 q4 q5 q6
-q = [q1 q2 q3 q4 q5 q6].';
-vals = [val1 val2 val3 val4 val5 val6].';
+plot_flag = true;
+[vm, vn] = size(vals);
+if vm <= 2
+    plot_flag = false;
+end
+
 [n_dof,m] = size(q);
 Individual_Transforms = sym(zeros(4,4,n_dof));
 Transforms = sym(zeros(4,4,n_dof));
-
-thetas = q;
-thetas(2,1) = q2 - 90;
-thetas(6,1) = q6 + 180;
-d = [290 0 0 302 0 72].';
-a = [0 270 70 0 0 0].';
-alpha = [-90 0 -90 90 -90 0].';
 
 for i = 1:n_dof
     Individual_Transforms(:,:,i) = ...
@@ -25,21 +21,20 @@ for i = 1:n_dof
     end
 end
 
-T01 = Individual_Transforms(:,:,1);
-T12 = Individual_Transforms(:,:,2);
-T23 = Individual_Transforms(:,:,3);
-T34 = Individual_Transforms(:,:,4);
-T45 = Individual_Transforms(:,:,5);
-T56 = Individual_Transforms(:,:,6);
+T = Transforms(:,:,n_dof);
 
-T06 = Transforms(:,:,6);
-
-solution = double(simplify(fk_solve(Transforms, q, vals, 0)));
-T = solution(:,:,6)
-indTransforms = double( ...
+if plot_flag
+    solution = double(simplify(fk_solve(Transforms, q, vals, 0)));
+    T = solution(:,:,n_dof);
+    
+    if runsim
+        Transforms = solution;
+    end
+    
+    indTransforms = double( ...
                     simplify(fk_solve(Individual_Transforms, q, vals, 0)));
-
-f = drawManip(solution, indTransforms, 'ABB_Robot');
+    f = drawManip(solution, ax);
+end
 
 end
 
